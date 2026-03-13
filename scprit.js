@@ -1,12 +1,9 @@
-async function loadPrice(){
+<span id="btc-price">Loading...</span>
 
-let res = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT");
-let data = await res.json();
-
-document.getElementById("price").innerHTML =
-"BTC Price : $" + data.price;
-
-}
-
-setInterval(loadPrice,3000);
-loadPrice();
+<script>
+fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd")
+.then(res => res.json())
+.then(data => {
+document.getElementById("btc-price").innerText = "$" + data.bitcoin.usd;
+});
+</script>
