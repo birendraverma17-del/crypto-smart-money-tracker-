@@ -1,16 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>BTC Smart Money</title>
-<script src="script.js"></script>
-<link rel="stylesheet" href="style.css">
+<title>BTC Smart Money Tracker</title>
 </head>
 
-<body>
+<body style="background:black;color:white;text-align:center;font-family:Arial;">
 
-<h1>BTC Smart Money Dashboard</h1>
+<h1>BTC Smart Money Tracker</h1>
 
 <p id="price">Loading BTC price...</p>
 
+<script>
+
+async function loadPrice(){
+
+try{
+
+let res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+
+let data = await res.json();
+
+document.getElementById("price").innerHTML =
+"BTC Price : $" + data.bitcoin.usd;
+
+}
+
+catch(error){
+
+document.getElementById("price").innerHTML =
+"Error loading BTC price";
+
+}
+
+}
+
+loadPrice();
+
+setInterval(loadPrice,3000);
+
+</script>
+
 </body>
+
 </html>
